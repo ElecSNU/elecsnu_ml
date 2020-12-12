@@ -10,9 +10,13 @@ model = pickle.load(open('hello.pkl','rb'))
 app = Flask(__name__)
 CORS(app)
 
-# @app.route('/')
-# def man():
-#     return render_template('home.html')
+
+# API DETAILS :
+# POST REQUEST, BODY DETAILS :
+# {
+#     "URL": "URL",
+#     "ROLLNO": "ROLLNO"
+# }
 
 @app.route('/predict',methods=['POST'])
 @cross_origin()
