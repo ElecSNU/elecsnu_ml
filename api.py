@@ -10,6 +10,10 @@ model = pickle.load(open('hello.pkl','rb'))
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/')
+def home():
+    return "Hello World"
+
 
 # API DETAILS :
 # POST REQUEST, BODY DETAILS :
