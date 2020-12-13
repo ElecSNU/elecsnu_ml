@@ -92,7 +92,7 @@ class FaceRecognize:
 
 
 
-model = pickle.load(open('./hello.pkl','rb'))
+model = pickle.load(open('model.pkl','rb'))
 # Your API definition
 app = Flask(__name__)
 CORS(app)
@@ -124,6 +124,6 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port = 5000, debug=True)
 
 # app.run(debug=True)
