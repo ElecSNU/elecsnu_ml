@@ -1,0 +1,1 @@
+web: gunicorn Deploy\ App.api:app
