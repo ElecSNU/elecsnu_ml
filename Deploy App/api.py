@@ -4,8 +4,7 @@ import pickle
 import urllib.request
 # from recog import FaceRecognize
 import os
-recog = __import__('recog')
-FaceRecognize = recog.FaceRecognize
+from recog import FaceRecognize
 
 model = pickle.load(open('hello.pkl','rb'))
 # Your API definition
