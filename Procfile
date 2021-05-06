@@ -1,1 +1,1 @@
-web: gunicorn Deploy\ App.recog:app
+web: gunicorn main:app
