@@ -1,4 +1,3 @@
-from DeployApp.recog import FaceRecognize
 # Dependencies
 from flask import Flask, request, jsonify,make_response
 import pickle
