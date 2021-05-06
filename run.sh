@@ -1,2 +1,2 @@
 #!/bin/env bash
-python Deploy\ App/api.py
+python Deploy\ App/recog.py

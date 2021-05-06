@@ -6,6 +6,10 @@ import joblib
 import os
 import pickle
 
+# Dependencies
+from flask import Flask, request, jsonify,make_response
+import urllib.request
+
 
 class FaceRecognize:
     def fit(self,Path):
@@ -75,19 +79,51 @@ class FaceRecognize:
         # return temp==name
         return name==temp
     
+
+
+
+
+model = pickle.load(open('hello.pkl','rb'))
+# Your API definition
+app = Flask(__name__)
+
+
+@app.route('/')
+def man():
+    return {'message': 'Hello World'}
+
+@app.route('/predict',methods=['POST'])
+def predict():   
+    req = request.get_json()
+    filename = 'face.jpg'
+    #image_url = "https://thumbs.dreamstime.com/z/happy-little-boy-smiley-face-portrait-human-concept-freshness-133726078.jpg"
+    image_url = str(req['URL'])
+    urllib.request.urlretrieve(image_url,filename)
+    print(req)
+    pred = model.predict(filename,req['ROLLNO'])
+    check = {"message" :str(pred)}
+    print(check)
+    return check 
+
+
+
+
 if __name__ == '__main__':
-    Path =  "E:\College\Fifth Semester\Software Engineering\Project\Face Recognize\Images\Train"
-    model = FaceRecognize()
-    model.fit(Path)
-    print(Path)
-    PredictPath = "E:\College\Fifth Semester\Software Engineering\Project\Face Recognize\Images\Predict\check4.jpg"
-    print("Enter the name")
-    RollNo = "1810110088"
-    # Current Model
-    print(model.predict(PredictPath,RollNo))
-    # Write the model on the disk using pickle
-    pickle.dump(model,open('hello.pkl','wb'))
+    app.run(debug=True)
+
+# if __name__ == '__main__':
+#     Path =  "E:\College\Fifth Semester\Software Engineering\Project\Face Recognize\Images\Train"
+#     model = FaceRecognize()
+#     model.fit(Path)
+#     print(Path)
+#     PredictPath = "E:\College\Fifth Semester\Software Engineering\Project\Face Recognize\Images\Predict\check4.jpg"
+#     print("Enter the name")
+#     RollNo = "1810110088"
+#     # Current Model
+#     print(model.predict(PredictPath,RollNo))
+#     # Write the model on the disk using pickle
+#     pickle.dump(model,open('hello.pkl','wb'))
     
-    check = pickle.load(open('hello.pkl','rb'))
-    print(check.predict(PredictPath,RollNo))
+#     check = pickle.load(open('hello.pkl','rb'))
+#     print(check.predict(PredictPath,RollNo))
 
